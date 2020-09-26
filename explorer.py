@@ -1,8 +1,4 @@
 #!/usr/bin/env python 
-# Welcome to my new tool EXPLORER /|\ 
-# This code written by Eslam Akl - Follow me on Medium blog @eslam3kl
-# It's open source so you can modify it or use it for any another tool 
-# Let's start ... 
 
 from termcolor import colored 
 from pyfiglet import Figlet
@@ -46,6 +42,18 @@ def send_request(url):
 		print(colored('\n\n[-]Happy to work with you Bro <3\n[-]Good Bye\n', 'magenta', attrs=['bold']))
 		raise SystemExit
 
+#this function is used only to send response code and content to get links function
+#the differance from send_requests is timeout 
+def send_request_get_content(url): 	
+	try: 
+		request = requests.get("http://" + url, timeout=4) 
+		return request
+	except (requests.exceptions.InvalidURL, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema, requests.exceptions.ReadTimeout):
+		pass 
+	except KeyboardInterrupt: 
+		print(colored('\n\n[-]Happy to work with you Bro <3\n[-]Good Bye\n', 'magenta', attrs=['bold']))
+		raise SystemExit
+
 #get the valid subdomains 
 def get_subdomains(url):
 	with open(dir_location + "/sub_list.txt", "r") as subdomain:
@@ -70,7 +78,7 @@ def get_directories(url):
 				
 #function to get the links in the page source
 def get_links(url, company_name):
-	response_code = send_request(url)
+	response_code = send_request_get_content(url)
 	content = response_code.content	
 	links = re.findall('(?:href=")(.*?)"', content)
 	#filter the results 
@@ -128,4 +136,3 @@ elif mode == '4':
 else: 
 	print(colored('[-] Select mode number to explore, see --help for more info', 'red', attrs=['bold']))
 
-# ===========[ END OF THE CODE ]============== # 
