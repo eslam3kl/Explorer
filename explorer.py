@@ -1,4 +1,8 @@
 #!/usr/bin/env python 
+# Welcome to my new tool EXPLORER /|\ 
+# This code written by Eslam Akl - Follow me on Medium blog @eslam3kl
+# It's open source so you can modify it or use it for any another tool 
+# Let's start ... 
 
 from termcolor import colored 
 from pyfiglet import Figlet
@@ -124,3 +128,4 @@ elif mode == '4':
 else: 
 	print(colored('[-] Select mode number to explore, see --help for more info', 'red', attrs=['bold']))
 
+# ===========[ END OF THE CODE ]============== # 
